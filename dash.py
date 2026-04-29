@@ -492,8 +492,8 @@ if not df_agents.empty:
     rows_html = ""
     for _, row in df_agents.iterrows():
         atteinte = pct_to_float(row["Atteinte objectif %"])
-        rows_html += f"""
-        <tr>
+    rows_html += f"""
+     <tr>
             <td class="op-name">{row["Opérateur"]}</td>
             <td>{row["Objectif"]}</td>
             <td>{row["Réalisé"]}</td>
@@ -515,8 +515,8 @@ if not df_agents.empty:
             <td>{row["Taux joint %"]}</td>
             <td>{row["Transfo/contacté %"]}</td>
             <td>{row["Transfo/joint %"]}</td>
-        </tr>
-        """
+     </tr>
+    """
 st.markdown(dedent(f"""
     <style>
 .agent-table {{
