@@ -489,7 +489,6 @@ def pct_to_float(value):
 if not df_agents.empty:
 
     rows_html = ""
-
     for _, row in df_agents.iterrows():
         atteinte = pct_to_float(row["Atteinte objectif %"])
 
@@ -612,6 +611,7 @@ if not df_agents.empty:
 
 else:
     st.info("Aucune donnée agent disponible.")
+    
 st.markdown('<div class="section-title">►  Top opérateur</div>', unsafe_allow_html=True)
 
 if not df_agents.empty:
