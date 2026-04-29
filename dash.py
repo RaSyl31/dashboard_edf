@@ -192,11 +192,6 @@ section[data-testid="stSidebar"] button {
     padding-right: 2rem !important;
 }
 
-.agent-table {
-    width: 100% !important;
-    min-width: 1200px;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
