@@ -52,7 +52,7 @@ st.markdown("""
     border: 1px solid #E5EAF2;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.04);
     text-align: center;
-    min-height: 78px;
+    min-height: 65px;
 }
 
 .kpi-label {
