@@ -488,37 +488,39 @@ def pct_to_float(value):
         return 0
 
 if not df_agents.empty:
-
     rows_html = ""
+
     for _, row in df_agents.iterrows():
         atteinte = pct_to_float(row["Atteinte objectif %"])
-    rows_html += f"""
-     <tr>
-            <td class="op-name">{row["Opérateur"]}</td>
-            <td>{row["Objectif"]}</td>
-            <td>{row["Réalisé"]}</td>
-            <td>
-                <div class="progress-wrap">
-                    <span>{row["Atteinte objectif %"]}</span>
-                    <div class="progress-bg">
-                        <div class="progress-bar" style="width:{min(atteinte,100)}%;"></div>
-                    </div>
-                </div>
-            </td>
-            <td>{row["Total fiches"]}</td>
-            <td>{row["Contacté"]}</td>
-            <td>{row["Joint"]}</td>
-            <td>{row["Non traité"]}</td>
-            <td>{row["Invalide"]}</td>
-            <td>{row["Non joint"]}</td>
-            <td>{row["À rappeler"]}</td>
-            <td>{row["Taux joint %"]}</td>
-            <td>{row["Transfo/contacté %"]}</td>
-            <td>{row["Transfo/joint %"]}</td>
-     </tr>
-    """
-st.markdown(dedent(f"""
-    <style>
+
+        rows_html += f"""
+<tr>
+    <td class="op-name">{row["Opérateur"]}</td>
+    <td>{row["Objectif"]}</td>
+    <td>{row["Réalisé"]}</td>
+    <td>
+        <div class="progress-wrap">
+            <span>{row["Atteinte objectif %"]}</span>
+            <div class="progress-bg">
+                <div class="progress-bar" style="width:{min(atteinte,100)}%;"></div>
+            </div>
+        </div>
+    </td>
+    <td>{row["Total fiches"]}</td>
+    <td>{row["Contacté"]}</td>
+    <td>{row["Joint"]}</td>
+    <td>{row["Non traité"]}</td>
+    <td>{row["Invalide"]}</td>
+    <td>{row["Non joint"]}</td>
+    <td>{row["À rappeler"]}</td>
+    <td>{row["Taux joint %"]}</td>
+    <td>{row["Transfo/contacté %"]}</td>
+    <td>{row["Transfo/joint %"]}</td>
+</tr>
+"""
+
+    st.markdown(dedent(f"""
+<style>
 .agent-table {{
     width: 100%;
     border-collapse: separate;
@@ -558,7 +560,6 @@ st.markdown(dedent(f"""
 .op-name {{
     font-weight: 800;
     text-align: left !important;
-    color: #111827;
 }}
 
 .progress-wrap {{
@@ -567,7 +568,7 @@ st.markdown(dedent(f"""
     gap: 8px;
     justify-content: center;
 }}
- 
+
 .progress-bg {{
     width: 70px;
     height: 8px;
@@ -581,7 +582,7 @@ st.markdown(dedent(f"""
     background: #0F766E;
     border-radius: 999px;
 }}
-    </style>
+</style>
 
 <table class="agent-table">
     <thead>
@@ -608,8 +609,8 @@ st.markdown(dedent(f"""
 </table>
 """), unsafe_allow_html=True)
 
-    else:
-        st.info("Aucune donnée agent disponible.")
+else:
+    st.info("Aucune donnée agent disponible.")
     
 st.markdown('<div class="section-title">►  Top opérateur</div>', unsafe_allow_html=True)
 
