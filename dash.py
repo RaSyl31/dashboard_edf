@@ -480,51 +480,138 @@ with g4:
 
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
-if not df_agents.empty:
-    def style_table(df):
-     return (
-        df.style
-        .set_table_attributes('style="width:100%; border-collapse:collapse;"')
-        .set_properties(**{
-            "text-align": "center",
-            "font-size": "13px",
-            "color": "#111827"
-        })
-        .set_table_styles([
-            {
-                "selector": "th",
-                "props": [
-                    ("background-color", "#2563EB"),
-                    ("color", "white"),
-                    ("font-weight", "bold"),
-                    ("font-size", "13px"),
-                    ("text-align", "center"),
-                    ("padding", "10px")
-                ]
-            },
-            {
-                "selector": "td",
-                "props": [
-                    ("text-align", "center"),
-                    ("padding", "9px"),
-                    ("border", "1px solid #E5E7EB")
-                ]
-            },
-            {
-                "selector": "tbody tr:nth-child(even)",
-                "props": [("background-color", "#F8FAFC")]
-            },
-            {
-                "selector": "tbody tr:nth-child(odd)",
-                "props": [("background-color", "#FFFFFF")]
-            }
-        ])
-     )
+def pct_to_float(value):
+    try:
+        return float(str(value).replace("%", "").strip())
+    except:
+        return 0
 
-    st.markdown(style_table(df_agents).to_html(), unsafe_allow_html=True)
+if not df_agents.empty:
+
+    rows_html = ""
+
+    for _, row in df_agents.iterrows():
+        atteinte = pct_to_float(row["Atteinte objectif %"])
+
+        rows_html += f"""
+        <tr>
+            <td class="op-name">{row["Opérateur"]}</td>
+            <td>{row["Objectif"]}</td>
+            <td>{row["Réalisé"]}</td>
+            <td>
+                <div class="progress-wrap">
+                    <span>{row["Atteinte objectif %"]}</span>
+                    <div class="progress-bg">
+                        <div class="progress-bar" style="width:{min(atteinte,100)}%;"></div>
+                    </div>
+                </div>
+            </td>
+            <td>{row["Total fiches"]}</td>
+            <td>{row["Contacté"]}</td>
+            <td>{row["Joint"]}</td>
+            <td>{row["Non traité"]}</td>
+            <td>{row["Invalide"]}</td>
+            <td>{row["Non joint"]}</td>
+            <td>{row["À rappeler"]}</td>
+            <td>{row["Taux joint %"]}</td>
+            <td>{row["Transfo/contacté %"]}</td>
+            <td>{row["Transfo/joint %"]}</td>
+        </tr>
+        """
+
+    st.markdown(f"""
+    <style>
+    .agent-table {{
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.06);
+        font-size: 13px;
+    }}
+
+    .agent-table th {{
+        background: #0F172A;
+        color: white;
+        padding: 12px 10px;
+        text-align: center;
+        font-weight: 800;
+        white-space: nowrap;
+    }}
+
+    .agent-table td {{
+        padding: 11px 10px;
+        text-align: center;
+        border-bottom: 1px solid #E5E7EB;
+        color: #111827;
+        white-space: nowrap;
+    }}
+
+    .agent-table tr:nth-child(even) td {{
+        background: #F8FAFC;
+    }}
+
+    .agent-table tr:hover td {{
+        background: #EEF3FF;
+    }}
+
+    .op-name {{
+        font-weight: 800;
+        text-align: left !important;
+        color: #111827;
+    }}
+
+    .progress-wrap {{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+    }}
+
+    .progress-bg {{
+        width: 70px;
+        height: 8px;
+        background: #E5E7EB;
+        border-radius: 999px;
+        overflow: hidden;
+    }}
+
+    .progress-bar {{
+        height: 100%;
+        background: #0F766E;
+        border-radius: 999px;
+    }}
+    </style>
+
+    <table class="agent-table">
+        <thead>
+            <tr>
+                <th>Opérateur</th>
+                <th>Objectif</th>
+                <th>Réalisé</th>
+                <th>Atteinte objectif</th>
+                <th>Total fiches</th>
+                <th>Contacté</th>
+                <th>Joint</th>
+                <th>Non traité</th>
+                <th>Invalide</th>
+                <th>Non joint</th>
+                <th>À rappeler</th>
+                <th>Taux joint</th>
+                <th>Transfo/contacté</th>
+                <th>Transfo/joint</th>
+            </tr>
+        </thead>
+        <tbody>
+            {rows_html}
+        </tbody>
+    </table>
+    """, unsafe_allow_html=True)
+
 else:
     st.info("Aucune donnée agent disponible.")
-
 st.markdown('<div class="section-title">►  Top opérateur</div>', unsafe_allow_html=True)
 
 if not df_agents.empty:
