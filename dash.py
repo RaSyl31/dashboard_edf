@@ -436,11 +436,20 @@ st.markdown('<div class="section-title">🏆 Top opérateur</div>', unsafe_allow
 
 if not df_agents.empty:
     top = df_agents.iloc[0]
-    st.success(
-        f"Top opérateur : {top['Opérateur']} | "
-        f"Réalisé : {top['Réalisé']} vs Objectif : {top['Objectif']} "
-        f"({top['Atteinte objectif %']}%)"
-    )
+    st.markdown(f"""
+<div style="
+    background-color: #EEF3FF;
+    border: 1px solid #C7D2FE;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 700;
+    color: #1E3A8A;
+">
+🏆 Top opérateur : {top['Opérateur']} | 
+Réalisé : {top['Réalisé']} / Objectif : {top['Objectif']} 
+({top['Atteinte objectif %']}%)
+</div>
+""", unsafe_allow_html=True)
 else:
     st.info("Aucune donnée disponible.")
 
