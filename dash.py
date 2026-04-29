@@ -144,6 +144,43 @@ section[data-testid="stSidebar"] button {
     padding: 10px;
 }
 
+.kpi-flow-card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 18px;
+    border: 1px solid #E5EAF2;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 85px;
+}
+
+.kpi-icon {
+    font-size: 34px;
+    color: #64748B;
+}
+
+.kpi-flow-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.kpi-flow-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0F766E;
+}
+
+.gauge-card {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #E5EAF2;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
+    text-align: center;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -273,6 +310,42 @@ def exporter_excel(df_data, df_agents):
 
     return output.getvalue()
 
+def flow_card(icon, label, value):
+    st.markdown(f"""
+    <div class="kpi-flow-card">
+        <div class="kpi-icon">{icon}</div>
+        <div>
+            <div class="kpi-flow-label">{label}</div>
+            <div class="kpi-flow-value">{value}</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def gauge(title, value):
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=value,
+        number={"suffix": "%", "font": {"size": 20}},
+        title={"text": title, "font": {"size": 14}},
+        gauge={
+            "axis": {"range": [0, 100], "visible": False},
+            "bar": {"color": "#0F766E"},
+            "bgcolor": "#E5E7EB",
+            "borderwidth": 0,
+            "steps": [
+                {"range": [0, 100], "color": "#E5E7EB"}
+            ]
+        }
+    ))
+
+    fig.update_layout(
+        height=170,
+        margin=dict(l=10, r=10, t=35, b=5),
+        paper_bgcolor="white"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
 data_all = charger_donnees()
 
@@ -349,28 +422,36 @@ st.markdown("""
 
 st.markdown('<div class="section-title">►  Résultat global</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="row-spacing">', unsafe_allow_html=True)
-c1, c2, c3, c4 = st.columns(4)
-with c1:
-    card("Total fiches", kpi["total"], "black")
-with c2:
-    card("Contacté", kpi["contacte"], "blue")
-with c3:
-    card("Joint", kpi["joint"], "lightgreen")
-with c4:
-    card("Qualification OK", kpi["ok"], "green")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">▸ Résultat global</div>', unsafe_allow_html=True)
 
-c5, c6, c7, c8 = st.columns(4)
-with c5:
-    card("Non traité", kpi["non_traite"], "orange")
-with c6:
-    card("Invalide", kpi["invalide"], "red")
-with c7:
-    card("Non joint", kpi["non_joint"], "red")
-with c8:
-    card("À rappeler", kpi["a_rappeler"], "orange")
+c1, c2, c3, c4 = st.columns(4)
+
+with c1:
+    flow_card("📄", "Total fiches", kpi["total"])
+
+with c2:
+    flow_card("📞", "Contacté", kpi["contacte"])
+
+with c3:
+    flow_card("🤝", "Joint", kpi["joint"])
+
+with c4:
+    flow_card("📋", "Qualification OK", kpi["ok"])
+
+
+g1, g2, g3, g4 = st.columns(4)
+
+with g1:
+    gauge("Taux joint", round(kpi["taux_joint"] * 100, 2))
+
+with g2:
+    gauge("Taux de traitement", round(kpi["taux_traitement"] * 100, 2))
+
+with g3:
+    gauge("Taux de Transfo/joint", round(kpi["taux_tj"] * 100, 2))
+
+with g4:
+    gauge("Taux de Transfo/contacté", round(kpi["taux_tc"] * 100, 2))
     
     st.markdown('</div>', unsafe_allow_html=True)
 
