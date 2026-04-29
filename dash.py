@@ -347,7 +347,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="section-title">Résultat global</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">► Résultat global</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="row-spacing">', unsafe_allow_html=True)
 c1, c2, c3, c4 = st.columns(4)
@@ -385,7 +385,7 @@ with c12:
     card("Transfo/joint", f"{kpi['taux_tj']:.2%}", "green")
 
 
-st.markdown('<div class="section-title">Résultat par agent</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">► Résultat par agent</div>', unsafe_allow_html=True)
 
 if not df_agents.empty:
     def style_table(df):
@@ -432,7 +432,7 @@ if not df_agents.empty:
 else:
     st.info("Aucune donnée agent disponible.")
 
-st.markdown('<div class="section-title">Top opérateur</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">► Top opérateur</div>', unsafe_allow_html=True)
 
 if not df_agents.empty:
     top = df_agents.iloc[0]
