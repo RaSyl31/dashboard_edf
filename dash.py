@@ -192,6 +192,10 @@ section[data-testid="stSidebar"] button {
     padding-right: 2rem !important;
 }
 
+.agent-table th, .agent-table td {
+    white-space: nowrap;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
