@@ -440,7 +440,6 @@ df_agents = build_agent_table(data)
 st.markdown("""
 <div class="header-card">
     <div class="title"> Dashboard Production - EDF Solutions Solaires ⚡</div>
-    <div class="subtitle">Campagne de génération de leads B2B - Hellopro</div>
 </div>
 """, unsafe_allow_html=True)
 
