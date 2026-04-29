@@ -353,8 +353,8 @@ def gauge(title, value):
         number={
             "suffix": "%",
             "font": {
-                "size": 26,
-                "color": "#111827"
+                "size": 28,
+                "color": "#182466"
             }
         },
         gauge={
