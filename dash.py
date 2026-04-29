@@ -604,7 +604,7 @@ if not df_agents.empty:
         </tr>
     </thead>
         <tbody>
-        {rows_html}
+        {rows_html.strip()}
         </tbody>
 </table>
 """), unsafe_allow_html=True)
