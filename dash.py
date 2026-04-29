@@ -196,6 +196,19 @@ section[data-testid="stSidebar"] button {
     white-space: nowrap;
 }
 
+.table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 8px;
+}
+
+.agent-table {
+    width: max-content;
+    min-width: 100%;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -596,6 +609,7 @@ if not df_agents.empty:
 }}
 </style>
 
+<div class="table-scroll">
 <table class="agent-table">
     <thead>
         <tr>
@@ -619,6 +633,7 @@ if not df_agents.empty:
         {rows_html.strip()}
         </tbody>
 </table>
+</div>
 """), unsafe_allow_html=True)
 
 else:
