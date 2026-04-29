@@ -26,7 +26,7 @@ st.markdown("""
 .title {
     font-size: 35px;
     font-weight: 900;
-    color: #2842d4;
+    color: #3c5bff;
     text-align: center;
 }
 
@@ -38,11 +38,11 @@ st.markdown("""
 }
 
 .section-title {
-    font-size: 25px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: 800;
     margin-top: 24px;
     margin-bottom: 16px;
-    color: #111111;
+    color: #3c5bff;
 }
 
 .kpi-card {
