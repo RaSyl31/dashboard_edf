@@ -608,8 +608,8 @@ st.markdown(dedent(f"""
 </table>
 """), unsafe_allow_html=True)
 
-else:
-    st.info("Aucune donnée agent disponible.")
+    else:
+        st.info("Aucune donnée agent disponible.")
     
 st.markdown('<div class="section-title">►  Top opérateur</div>', unsafe_allow_html=True)
 
