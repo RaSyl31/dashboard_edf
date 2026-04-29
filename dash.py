@@ -331,7 +331,7 @@ def gauge(title, value):
         font-size: 16px;
         font-weight: 700;
         color: #111827;
-        margin-bottom: -10px;
+        margin-bottom: -2px;
     ">
     {title}
     </div>
