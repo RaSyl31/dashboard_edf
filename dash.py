@@ -493,7 +493,7 @@ if not df_agents.empty:
     for _, row in df_agents.iterrows():
         atteinte = pct_to_float(row["Atteinte objectif %"])
 
-        rows_html += f"""
+        rows_html += f"""\
 <tr>
     <td class="op-name">{row["Opérateur"]}</td>
     <td>{row["Objectif"]}</td>
