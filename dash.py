@@ -453,16 +453,6 @@ with g4:
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-c9, c10, c11, c12 = st.columns(4)
-with c9:
-    card("Taux traitement", f"{kpi['taux_traitement']:.2%}", "blue")
-with c10:
-    card("Taux joint", f"{kpi['taux_joint']:.2%}", "lightgreen")
-with c11:
-    card("Transfo/contacté", f"{kpi['taux_tc']:.2%}", "green")
-with c12:
-    card("Transfo/joint", f"{kpi['taux_tj']:.2%}", "green")
-
 
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
