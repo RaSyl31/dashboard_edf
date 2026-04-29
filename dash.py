@@ -133,7 +133,7 @@ st.markdown("""
 }
 
 .row-spacing {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 section[data-testid="stSidebar"] button {
