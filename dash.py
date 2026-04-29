@@ -519,7 +519,7 @@ if not df_agents.empty:
         </tr>
         """
 
-   st.markdown(dedent(f"""
+    st.markdown(dedent(f"""
 <style>
 .agent-table {{
     width: 100%;
