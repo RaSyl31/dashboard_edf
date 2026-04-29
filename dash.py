@@ -459,6 +459,8 @@ with c3:
 with c4:
     flow_card("📋", "Qualification OK", kpi["ok"])
 
+st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+
 g1, g2, g3, g4 = st.columns(4)
 
 with g1:
