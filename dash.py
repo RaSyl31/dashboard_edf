@@ -167,7 +167,7 @@ section[data-testid="stSidebar"] button {
 .kpi-flow-label {
     font-size: 15px;
     font-weight: 700;
-    color: #111827;
+    color: #182466;
 }
 
 .kpi-flow-value {
@@ -184,6 +184,19 @@ section[data-testid="stSidebar"] button {
     box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
     text-align: center;
 }
+
+.block-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+.agent-table {
+    width: 100% !important;
+    min-width: 1200px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
