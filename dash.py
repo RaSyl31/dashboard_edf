@@ -56,14 +56,14 @@ st.markdown("""
 }
 
 .kpi-label {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 650;
     color: #374151;
     text-align: center;
 }
 
 .kpi-value {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 900;
     margin-top: 4px;
     text-align: center;
