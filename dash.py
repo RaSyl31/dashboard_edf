@@ -603,6 +603,9 @@ if not df_agents.empty:
             <th>Transfo/joint</th>
         </tr>
     </thead>
+        <tbody>
+        {rows_html}
+        </tbody>
 </table>
 """), unsafe_allow_html=True)
 
