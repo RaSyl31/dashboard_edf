@@ -362,10 +362,10 @@ def gauge(title, value):
     ))
 
     fig.update_layout(
-        height=180,
-        margin=dict(l=10, r=10, t=10, b=10),
-        paper_bgcolor="white"
-    )
+    height=140,  # 👉 réduit la hauteur totale
+    margin=dict(l=5, r=5, t=0, b=0),  # 👉 enlève les espaces haut/bas
+    paper_bgcolor="white"
+)
 
     st.plotly_chart(fig, use_container_width=True)
 data_all = charger_donnees()
