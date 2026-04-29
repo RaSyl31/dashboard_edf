@@ -171,13 +171,13 @@ section[data-testid="stSidebar"] button {
 
 .kpi-flow-value {
     font-size: 28px;
-    font-weight: 900;
+    font-weight: 800;
     color: #182466;
 }
 
 .gauge-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 15px;
     padding: 10px;
     border: 1px solid #E5EAF2;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
