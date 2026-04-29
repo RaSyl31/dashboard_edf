@@ -337,7 +337,7 @@ def gauge(title, value):
         },
 
         # 👉 TITRE KPI
-        st.markdown(f"""
+st.markdown(f"""
 <div style="
     text-align: center;
     font-size: 16px;
