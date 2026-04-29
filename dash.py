@@ -38,7 +38,7 @@ st.markdown("""
 }
 
 .section-title {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 900;
     margin-top: 24px;
     margin-bottom: 16px;
