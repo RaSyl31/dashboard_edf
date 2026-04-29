@@ -360,7 +360,7 @@ def gauge(title, value):
         gauge={
             "axis": {"range": [0, 100], "visible": False},
             "bar": {
-                "color": "#0F766E",
+                "color": "#3c5bff",
                 "thickness": 0.28
             },
             "bgcolor": "#E5E7EB",
