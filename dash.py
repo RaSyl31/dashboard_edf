@@ -52,17 +52,17 @@ st.markdown("""
     border: 1px solid #E5EAF2;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.04);
     text-align: center;
-    min-height: 65px;
+    min-height: 60px;
 }
 
 .kpi-label {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 650;
     color: #374151;
 }
 
 .kpi-value {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 900;
     margin-top: 4px;
 }
