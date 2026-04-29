@@ -462,8 +462,6 @@ with c3:
 with c4:
     flow_card("📋", "Qualification OK", kpi["ok"])
 
-st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
-
 g1, g2, g3, g4 = st.columns(4)
 
 with g1:
@@ -477,6 +475,8 @@ with g3:
 
 with g4:
     gauge("Taux de Transfo/contacté", round(kpi["taux_tc"] * 100, 2))
+
+st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
 if not df_agents.empty:
     def style_table(df):
