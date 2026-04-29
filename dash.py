@@ -371,8 +371,6 @@ def gauge(title, value):
         paper_bgcolor="white"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
-
 data_all = charger_donnees()
 
 st.sidebar.image("logo_hellopro.png", width=250)
