@@ -1,3 +1,4 @@
+from textwrap import dedent
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -518,96 +519,96 @@ if not df_agents.empty:
         </tr>
         """
 
-    st.markdown(f"""
-    <style>
-    .agent-table {{
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        background: white;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.06);
-        font-size: 13px;
-    }}
+   st.markdown(dedent(f"""
+<style>
+.agent-table {{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.06);
+    font-size: 13px;
+}}
 
-    .agent-table th {{
-        background: #0F172A;
-        color: white;
-        padding: 12px 10px;
-        text-align: center;
-        font-weight: 800;
-        white-space: nowrap;
-    }}
+.agent-table th {{
+    background: #0F172A;
+    color: white;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 800;
+    white-space: nowrap;
+}}
 
-    .agent-table td {{
-        padding: 11px 10px;
-        text-align: center;
-        border-bottom: 1px solid #E5E7EB;
-        color: #111827;
-        white-space: nowrap;
-    }}
+.agent-table td {{
+    padding: 11px 10px;
+    text-align: center;
+    border-bottom: 1px solid #E5E7EB;
+    color: #111827;
+    white-space: nowrap;
+}}
 
-    .agent-table tr:nth-child(even) td {{
-        background: #F8FAFC;
-    }}
+.agent-table tr:nth-child(even) td {{
+    background: #F8FAFC;
+}}
 
-    .agent-table tr:hover td {{
-        background: #EEF3FF;
-    }}
+.agent-table tr:hover td {{
+    background: #EEF3FF;
+}}
 
-    .op-name {{
-        font-weight: 800;
-        text-align: left !important;
-        color: #111827;
-    }}
+.op-name {{
+    font-weight: 800;
+    text-align: left !important;
+    color: #111827;
+}}
 
-    .progress-wrap {{
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        justify-content: center;
-    }}
+.progress-wrap {{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}}
 
-    .progress-bg {{
-        width: 70px;
-        height: 8px;
-        background: #E5E7EB;
-        border-radius: 999px;
-        overflow: hidden;
-    }}
+.progress-bg {{
+    width: 70px;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 999px;
+    overflow: hidden;
+}}
 
-    .progress-bar {{
-        height: 100%;
-        background: #0F766E;
-        border-radius: 999px;
-    }}
-    </style>
+.progress-bar {{
+    height: 100%;
+    background: #0F766E;
+    border-radius: 999px;
+}}
+</style>
 
-    <table class="agent-table">
-        <thead>
-            <tr>
-                <th>Opérateur</th>
-                <th>Objectif</th>
-                <th>Réalisé</th>
-                <th>Atteinte objectif</th>
-                <th>Total fiches</th>
-                <th>Contacté</th>
-                <th>Joint</th>
-                <th>Non traité</th>
-                <th>Invalide</th>
-                <th>Non joint</th>
-                <th>À rappeler</th>
-                <th>Taux joint</th>
-                <th>Transfo/contacté</th>
-                <th>Transfo/joint</th>
-            </tr>
-        </thead>
-        <tbody>
-            {rows_html}
-        </tbody>
-    </table>
-    """, unsafe_allow_html=True)
+<table class="agent-table">
+    <thead>
+        <tr>
+            <th>Opérateur</th>
+            <th>Objectif</th>
+            <th>Réalisé</th>
+            <th>Atteinte objectif</th>
+            <th>Total fiches</th>
+            <th>Contacté</th>
+            <th>Joint</th>
+            <th>Non traité</th>
+            <th>Invalide</th>
+            <th>Non joint</th>
+            <th>À rappeler</th>
+            <th>Taux joint</th>
+            <th>Transfo/contacté</th>
+            <th>Transfo/joint</th>
+        </tr>
+    </thead>
+    <tbody>
+        {rows_html}
+    </tbody>
+</table>
+"""), unsafe_allow_html=True)
 
 else:
     st.info("Aucune donnée agent disponible.")
