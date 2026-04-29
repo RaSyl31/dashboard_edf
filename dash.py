@@ -327,17 +327,24 @@ def flow_card(icon, label, value):
 def gauge(title, value):
 
     # 👉 TITRE AU-DESSUS (EN DEHORS DU GRAPH)
-    st.markdown(f"""
+ st.markdown(f"""
+<div style="text-align:center; margin-bottom:6px;">
     <div style="
-        text-align: center;
-        font-size: 16px;
-        font-weight: 700;
-        color: #111827;
-        margin-bottom: -2px;
+        font-size:14px;
+        font-weight:800;
+        color:#111827;
     ">
-    {title}
+        {title}
     </div>
-    """, unsafe_allow_html=True)
+    <div style="
+        width:40px;
+        height:3px;
+        background:#3B82F6;
+        margin:4px auto;
+        border-radius:2px;
+    "></div>
+</div>
+""", unsafe_allow_html=True)
 
     # 👉 GAUGE
     fig = go.Figure(go.Indicator(
