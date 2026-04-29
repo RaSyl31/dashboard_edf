@@ -326,25 +326,25 @@ def flow_card(icon, label, value):
 
 def gauge(title, value):
 
-    # 👉 TITRE AU-DESSUS (EN DEHORS DU GRAPH)
- st.markdown(f"""
-<div style="text-align:center; margin-bottom:6px;">
-    <div style="
-        font-size:14px;
-        font-weight:800;
-        color:#111827;
-    ">
-        {title}
+    # 👉 TITRE AU-DESSUS
+    st.markdown(f"""
+    <div style="text-align:center; margin-bottom:6px;">
+        <div style="
+            font-size:14px;
+            font-weight:800;
+            color:#111827;
+        ">
+            {title}
+        </div>
+        <div style="
+            width:40px;
+            height:3px;
+            background:#3B82F6;
+            margin:4px auto;
+            border-radius:2px;
+        "></div>
     </div>
-    <div style="
-        width:40px;
-        height:3px;
-        background:#3B82F6;
-        margin:4px auto;
-        border-radius:2px;
-    "></div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
     # 👉 GAUGE
     fig = go.Figure(go.Indicator(
@@ -369,10 +369,10 @@ def gauge(title, value):
     ))
 
     fig.update_layout(
-    height=140,  # 👉 réduit la hauteur totale
-    margin=dict(l=5, r=5, t=0, b=0),  # 👉 enlève les espaces haut/bas
-    paper_bgcolor="white"
-)
+        height=140,
+        margin=dict(l=5, r=5, t=0, b=0),
+        paper_bgcolor="white"
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 data_all = charger_donnees()
