@@ -330,9 +330,9 @@ def gauge(title, value):
     st.markdown(f"""
     <div style="text-align:center; margin-bottom:6px;">
         <div style="
-            font-size:14px;
-            font-weight:800;
-            color:#111827;
+            font-size:18px;
+            font-weight:850;
+            color:#182466;
         ">
             {title}
         </div>
