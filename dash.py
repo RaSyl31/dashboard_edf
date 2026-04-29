@@ -323,32 +323,31 @@ def flow_card(icon, label, value):
 
 
 def gauge(title, value):
+
+    # 👉 TITRE AU-DESSUS (EN DEHORS DU GRAPH)
+    st.markdown(f"""
+    <div style="
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 5px;
+    ">
+    {title}
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 👉 GAUGE
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
-
-        # 👉 TEXTE KPI (LE PROBLÈME EST ICI)
         number={
             "suffix": "%",
             "font": {
                 "size": 26,
-                "color": "#111827"   # 👉 NOIR (avant c'était clair)
+                "color": "#111827"
             }
         },
-
-        # 👉 TITRE KPI
-st.markdown(f"""
-<div style="
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom:  5px;
-">
-{title}
-</div>
-""", unsafe_allow_html=True)
-
         gauge={
             "axis": {"range": [0, 100], "visible": False},
             "bar": {
@@ -361,20 +360,12 @@ st.markdown(f"""
     ))
 
     fig.update_layout(
-        height=190,
-        margin=dict(l=10, r=10, t=45, b=10),
-        paper_bgcolor="white",
-        font=dict(color="#111827")  # 👉 force le noir partout
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    fig.update_layout(
-        height=170,
-        margin=dict(l=10, r=10, t=35, b=5),
+        height=180,
+        margin=dict(l=10, r=10, t=10, b=10),
         paper_bgcolor="white"
     )
 
+    st.plotly_chart(fig, use_container_width=True)
 data_all = charger_donnees()
 
 st.sidebar.image("logo_hellopro.png", width=250)
