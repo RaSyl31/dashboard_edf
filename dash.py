@@ -326,18 +326,44 @@ def gauge(title, value):
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
-        number={"suffix": "%", "font": {"size": 20}},
-        title={"text": title, "font": {"size": 14}},
+
+        # 👉 TEXTE KPI (LE PROBLÈME EST ICI)
+        number={
+            "suffix": "%",
+            "font": {
+                "size": 26,
+                "color": "#111827"   # 👉 NOIR (avant c'était clair)
+            }
+        },
+
+        # 👉 TITRE KPI
+        title={
+            "text": title,
+            "font": {
+                "size": 16,
+                "color": "#111827"   # 👉 NOIR aussi
+            }
+        },
+
         gauge={
             "axis": {"range": [0, 100], "visible": False},
-            "bar": {"color": "#0F766E"},
+            "bar": {
+                "color": "#0F766E",
+                "thickness": 0.28
+            },
             "bgcolor": "#E5E7EB",
-            "borderwidth": 0,
-            "steps": [
-                {"range": [0, 100], "color": "#E5E7EB"}
-            ]
+            "borderwidth": 0
         }
     ))
+
+    fig.update_layout(
+        height=190,
+        margin=dict(l=10, r=10, t=45, b=10),
+        paper_bgcolor="white",
+        font=dict(color="#111827")  # 👉 force le noir partout
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 
     fig.update_layout(
         height=170,
