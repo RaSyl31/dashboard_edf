@@ -59,6 +59,7 @@ st.markdown("""
     font-size: 17px;
     font-weight: 650;
     color: #374151;
+    text-align: center;
 }
 
 .kpi-value {
