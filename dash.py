@@ -464,6 +464,20 @@ with c4:
 
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
+g1, g2, g3, g4 = st.columns(4)
+
+with g1:
+    gauge("Taux joint", round(kpi["taux_joint"] * 100, 2))
+
+with g2:
+    gauge("Taux de traitement", round(kpi["taux_traitement"] * 100, 2))
+
+with g3:
+    gauge("Taux de Transfo/joint", round(kpi["taux_tj"] * 100, 2))
+
+with g4:
+    gauge("Taux de Transfo/contacté", round(kpi["taux_tc"] * 100, 2))
+
 if not df_agents.empty:
     def style_table(df):
      return (
