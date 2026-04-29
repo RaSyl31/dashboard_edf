@@ -337,13 +337,17 @@ def gauge(title, value):
         },
 
         # 👉 TITRE KPI
-        title={
-            "text": title,
-            "font": {
-                "size": 16,
-                "color": "#111827"   # 👉 NOIR aussi
-            }
-        },
+        st.markdown(f"""
+<div style="
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom:  5px;
+">
+{title}
+</div>
+""", unsafe_allow_html=True)
 
         gauge={
             "axis": {"range": [0, 100], "visible": False},
