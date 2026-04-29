@@ -26,13 +26,13 @@ st.markdown("""
 .title {
     font-size: 35px;
     font-weight: 900;
-    color: #0b22a2;
+    color: #2842d4;
     text-align: center;
 }
 
 .subtitle {
     font-size: 20px;
-    color: #6B7280;
+    color: #2842d4;
     margin-top: 10px;
     text-align: center;
 }
