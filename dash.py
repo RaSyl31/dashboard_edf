@@ -66,6 +66,7 @@ st.markdown("""
     font-size: 20px;
     font-weight: 900;
     margin-top: 4px;
+    text-align: center;
 }
 
 .blue { color: #2563EB; }
