@@ -499,6 +499,15 @@ if "data_all" not in st.session_state:
     st.session_state.data_all = charger_donnees()
 
 data_all = st.session_state.data_all
+
+if "filters_applied" not in st.session_state:
+    st.session_state.filters_applied = {
+        "mois": "Tous",
+        "operateur": "Tous",
+        "cible": "Toutes",
+        "semaine": "Toutes",
+        "naf": "Tous"
+    }
     
 st.sidebar.image("logo_hellopro.png", width=250)
 
@@ -507,6 +516,15 @@ st.sidebar.markdown("<br>", unsafe_allow_html=True)
 if st.sidebar.button("🔄 Mettre à jour", use_container_width=True):
     st.cache_data.clear()
     st.session_state.data_all = charger_donnees()
+
+    st.session_state.filters_applied = {
+        "mois": st.session_state.mois_temp,
+        "operateur": st.session_state.op_temp,
+        "cible": st.session_state.cible_temp,
+        "semaine": st.session_state.semaine_temp,
+        "naf": st.session_state.naf_temp
+    }
+
     st.rerun()
 
 st.sidebar.title("Filtres")
@@ -595,10 +613,10 @@ with g2:
     gauge("Taux joint", round(kpi["taux_joint"] * 100, 2), 50)
 
 with g3:
-    gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2), 10)
+    gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2), 20)
 
 with g4:
-    gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2), 5)
+    gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2), 10)
     
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
