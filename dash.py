@@ -5,9 +5,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from io import BytesIO
 
-if "refresh" not in st.session_state:
-    st.session_state.refresh = False
-
 param_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPtJ4Ipch22BEPIjkL4U466elod-K3yegtgOiYKAcaXjMmcqpsM6g8zuA2F5VWWaZdrXavEIP3AbY2/pub?output=csv"
 
 OBJECTIF_JOURNALIER_PAR_AGENT = 3
@@ -425,17 +422,19 @@ def gauge(title, value, max_value):
     </div>
     """, unsafe_allow_html=True)
 
-if st.session_state.refresh:
-    data_all = charger_donnees()
-else:
-    st.stop()
+if "data_all" not in st.session_state:
+    st.session_state.data_all = charger_donnees()
+
+data_all = st.session_state.data_all
     
 st.sidebar.image("logo_hellopro.png", width=250)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
-if st.sidebar.button("🔄 Mettre à jour"):
-    st.session_state.refresh = True
+if st.sidebar.button("🔄 REFRESH", use_container_width=True):
+    st.cache_data.clear()
+    st.session_state.data_all = charger_donnees()
+    st.rerun()
 
 st.sidebar.title("Filtres")
 
