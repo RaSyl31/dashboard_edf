@@ -658,7 +658,7 @@ if not df_agents.empty:
     top = df_agents.iloc[0]
     st.markdown(f"""
 <div style="
-    background-color: #d8deff;
+    background-color: #f2fff7;
     border: 1px solid #9eadff;
     padding: 16px;
     border-radius: 14px;
