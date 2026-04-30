@@ -51,13 +51,13 @@ st.markdown("""
     padding: 12px 16px;
     border-radius: 10px;
     border: 1px solid #E5EAF2;
-    box-shadow: 0px 3px 8px rgba(0,0,0,0.04);
+    box-shadow: 0px 5px 8px rgba(0,0,0,0.04);
     text-align: center;
     min-height: 60px;
 }
 
 .kpi-label {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 650;
     color: #374151;
     text-align: center;
@@ -499,7 +499,7 @@ with c3:
     flow_card("🤝", "Joint", kpi["joint"])
 
 with c4:
-    flow_card("📋", "Qualification OK", kpi["ok"])
+    flow_card("✔️", "Qualification OK", kpi["ok"])
 
 st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
