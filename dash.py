@@ -379,16 +379,9 @@ def gauge(title, value, max_value):
     """, unsafe_allow_html=True)
 
     fig = go.Figure(go.Indicator(
-        mode="gauge+number",
+        mode="gauge",
         value=value,
-        number={
-            "suffix": "%",
-            "font": {
-                "size": 22,
-                "color": "#182466"
-            },
-            "valueformat": ".2f"
-        },
+
         gauge={
             "axis": {
                 "range": [0, max_value],
@@ -415,6 +408,19 @@ def gauge(title, value, max_value):
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+st.markdown(f"""
+<div style="
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#182466;
+    margin-top:-72px;
+    margin-bottom:45px;
+">
+{value:.2f}%
+</div>
+""", unsafe_allow_html=True)
 
 data_all = charger_donnees()
 
