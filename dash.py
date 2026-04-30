@@ -683,6 +683,10 @@ fig_funnel = go.Figure(go.Funnel(
 
     opacity=0.95
 ))
+
+fig_funnel.update_layout(
+    font=dict(size=16, color="#111827")
+)
     connector=dict(fillcolor="#ddebea"),
     marker={"color": ["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]}
 ))
