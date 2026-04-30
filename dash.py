@@ -492,11 +492,14 @@ st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 g1, g2, g3, g4 = st.columns(4)
 
 with g1:
-    gauge("Taux de traitement", round(kpi["taux_traitement"] * 100, 2))
+    gauge("Taux de traitement", round(kpi["taux_traitement"] * 100, 2), 100)
+
 with g2:
     gauge("Taux joint", round(kpi["taux_joint"] * 100, 2), 50)
+
 with g3:
     gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2), 10)
+
 with g4:
     gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2), 5)
     
