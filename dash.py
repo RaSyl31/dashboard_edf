@@ -255,6 +255,35 @@ div[data-baseweb="popover"] * {
     color: #111827 !important;
 }
 
+/* Menu déroulant ouvert */
+div[data-baseweb="popover"] {
+    background-color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] ul {
+    background-color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] li {
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+}
+
+div[data-baseweb="popover"] li:hover {
+    background-color: #EAF0FF !important;
+    color: #111827 !important;
+}
+
+/* Texte dans les options */
+div[data-baseweb="popover"] div {
+    color: #111827 !important;
+}
+
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
