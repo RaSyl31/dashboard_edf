@@ -658,12 +658,12 @@ if not df_agents.empty:
     top = df_agents.iloc[0]
     st.markdown(f"""
 <div style="
-    background-color: #EEF3FF;
-    border: 1px solid #C7D2FE;
+    background-color: #d8deff;
+    border: 1px solid #9eadff;
     padding: 16px;
     border-radius: 14px;
     font-weight: 700;
-    color: #1E3A8A;
+    color: #10571b;
 ">
 🏆 Top opérateur : {top['Opérateur']} | 
 Réalisé : {top['Réalisé']} / Objectif : {top['Objectif']} 
