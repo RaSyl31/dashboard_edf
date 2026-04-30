@@ -527,8 +527,7 @@ if "filters_applied" not in st.session_state:
 st.sidebar.image("logo_hellopro.png", width=250)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
-        submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
-
+submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
 st.sidebar.title("Filtres")
 
 dates_valides = data_all["Date appel"].dropna()
