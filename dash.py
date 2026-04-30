@@ -508,7 +508,7 @@ with c3:
     flow_card("🤝", "Joint", kpi["joint"])
 
 with c4:
-    flow_card("✔️", "Qualification OK", kpi["ok"])
+    flow_card("✔️", "OK Qualif", kpi["ok"])
 
 st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
@@ -685,7 +685,7 @@ else:
 st.markdown('<div class="section-title">📊 Funnel production</div>', unsafe_allow_html=True)
 
 fig_funnel = go.Figure(go.Funnel(
-    y=["Total fiches", "Contacté", "Joint", "Qualification OK"],
+    y=["Total fiches", "Contacté", "Joint", "OK Qualif"],
     x=[kpi["total"], kpi["contacte"], kpi["joint"], kpi["ok"]],
     textinfo="value+percent initial",
     textfont=dict(
@@ -711,7 +711,7 @@ fig_funnel.update_layout(
 
 fig_funnel.update_yaxes(
     tickfont=dict(
-        size=12,
+        size=15,
         color="#182466"  # 👉 change ici la couleur
     ),
     ticklabelposition="outside"
@@ -719,7 +719,7 @@ fig_funnel.update_yaxes(
 
 fig_funnel.update_yaxes(
     tickfont=dict(
-        size=12,
+        size=15,
         color="#111827"
     )
 )
