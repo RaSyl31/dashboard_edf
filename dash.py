@@ -668,17 +668,18 @@ fig_funnel = go.Figure(go.Funnel(
 
     textinfo="value+percent initial",
 
-    # 👉 TEXTE DANS LES BLOCS
     textfont=dict(
         size=18,
         color="white"
     ),
 
-    # 👉 LABELS À GAUCHE (LE PROBLÈME)
-    hoverlabel=dict(font_size=14),
+    marker=dict(
+        color=["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]
+    ),
 
-    # 👉 FORCER STYLE GLOBAL
-    marker={"color": ["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]},
+    connector=dict(
+        fillcolor="#E5E7EB"
+    ),
 
     opacity=0.95
 ))
