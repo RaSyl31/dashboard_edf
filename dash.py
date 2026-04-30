@@ -527,6 +527,12 @@ if "filters_applied" not in st.session_state:
 st.sidebar.image("logo_hellopro.png", width=250)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
+mois_list = sorted(data_all["Date appel"].dropna().dt.to_period("M").astype(str).unique())
+op_list = ["Tous"] + sorted(data_all["Operateur"].dropna().unique().tolist())
+cible_list = ["Toutes"] + sorted([x for x in data_all["Cible"].dropna().unique().tolist() if x])
+semaines = ["Toutes"] + sorted([x for x in data_all["Semaine"].unique().tolist() if x])
+nafs = ["Tous"] + sorted([x for x in data_all["Cible / code NAF"].unique().tolist() if x])
+
 with st.sidebar.form("form_filtres"):
 
     # 👉 Bouton en haut
