@@ -684,7 +684,15 @@ fig_funnel.update_layout(
     paper_bgcolor="#FFFFFF",
     plot_bgcolor="#FFFFFF",
     font=dict(size=16, color="#111827"),
-    margin=dict(l=20, r=20, t=30, b=20)
+    margin=dict(l=120, r=20, t=30, b=20)
+)
+
+fig_funnel.update_yaxes(
+    tickfont=dict(
+        size=16,
+        color="#182466"  # 👉 change ici la couleur
+    ),
+    ticklabelposition="outside"
 )
 
 fig_funnel.update_yaxes(
