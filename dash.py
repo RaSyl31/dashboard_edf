@@ -499,10 +499,10 @@ with g1:
 with g2:
     gauge("Taux joint", round(kpi["taux_joint"] * 100, 2))
 with g3:
-    gauge("Taux de Transfo/joint", round(kpi["taux_tj"] * 100, 2))
+    gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2))
 
 with g4:
-    gauge("Taux de Transfo/contacté", round(kpi["taux_tc"] * 100, 2))
+    gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2))
 
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
