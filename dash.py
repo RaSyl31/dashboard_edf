@@ -21,7 +21,7 @@ st.markdown("""
     border-radius: 18px;
     border: 1px solid #E3E8F0;
     box-shadow: 0px 4px 14px rgba(0,01,0,0.05);
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .title {
@@ -210,7 +210,7 @@ section[data-testid="stSidebar"] button {
 }
 
 .agent-table td:first-child {
-    background-color: #c5ceff !important;  /* 👉 couleur ici */
+    background-color: #d8deff !important;  /* 👉 couleur ici */
     font-weight: 700;
 }
 
