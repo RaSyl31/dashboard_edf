@@ -399,6 +399,19 @@ def gauge(title, value, max_value):
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+st.markdown(f"""
+<div style="
+    text-align:center;
+    font-size:13px;
+    font-weight:800;
+    color:#6B7280;
+    margin-top:-18px;
+">
+Limite : {max_value}%
+</div>
+""", unsafe_allow_html=True)
+
 data_all = charger_donnees()
 
 st.sidebar.image("logo_hellopro.png", width=250)
