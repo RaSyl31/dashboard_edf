@@ -488,7 +488,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="section-title">►  Résultat global</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-title">► <div> </div>Résultat global</div>', unsafe_allow_html=True)
 
 c1, c2, c3, c4 = st.columns(4)
 
