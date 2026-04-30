@@ -401,8 +401,8 @@ def gauge(title, value, max_value):
     ))
 
     fig.update_layout(
-        height=140,
-        margin=dict(l=5, r=5, t=0, b=0),
+        height=120,
+        margin=dict(l=10, r=10, t=10, b=20),
         paper_bgcolor="white"
     )
 
