@@ -386,7 +386,8 @@ def gauge(title, value, max_value):
             "font": {
                 "size": 22,
                 "color": "#182466"
-            }
+            },
+            "valueformat": ".2f"
         },
         gauge={
             "axis": {
