@@ -174,6 +174,8 @@ section[data-testid="stSidebar"] button {
     font-size: 28px;
     font-weight: 800;
     color: #182466;
+    line-height: 1.1;
+
 }
 
 .gauge-card {
