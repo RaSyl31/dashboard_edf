@@ -711,7 +711,7 @@ fig_funnel.update_layout(
 
 fig_funnel.update_yaxes(
     tickfont=dict(
-        size=16,
+        size=12,
         color="#182466"  # 👉 change ici la couleur
     ),
     ticklabelposition="outside"
@@ -719,7 +719,7 @@ fig_funnel.update_yaxes(
 
 fig_funnel.update_yaxes(
     tickfont=dict(
-        size=16,
+        size=12,
         color="#111827"
     )
 )
