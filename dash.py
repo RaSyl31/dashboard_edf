@@ -333,10 +333,8 @@ for _, row in param_df.iterrows():
         errors="coerce",
         dayfirst=True
     )
-
     return data
-
-
+)
 def calcul_kpi(df):
     total = len(df)
     invalide = len(df[df["Statut"] == "Invalide"])
