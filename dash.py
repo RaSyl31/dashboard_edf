@@ -525,55 +525,46 @@ if "filters_applied" not in st.session_state:
     }
     
 st.sidebar.image("logo_hellopro.png", width=250)
-
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
-
-if st.sidebar.button("🔄 Mettre à jour", use_container_width=True):
-    st.cache_data.clear()
-    st.session_state.data_all = charger_donnees()
-
-    st.session_state.filters_applied = {
-        "mois": st.session_state.mois_temp,
-        "operateur": st.session_state.op_temp,
-        "cible": st.session_state.cible_temp,
-        "semaine": st.session_state.semaine_temp,
-        "naf": st.session_state.naf_temp
-    }
-
-    st.rerun()
 
 st.sidebar.title("Filtres")
 
 dates_valides = data_all["Date appel"].dropna()
-periode = None
 
-if not dates_valides.empty:
-    date_min = dates_valides.min().date()
-    date_max = dates_valides.max().date()
-    mois_list = sorted(data_all["Date appel"].dropna().dt.to_period("M").astype(str).unique())
-    mois_selected = st.sidebar.selectbox("Mois", ["Tous"] + mois_list)
-
+mois_list = sorted(data_all["Date appel"].dropna().dt.to_period("M").astype(str).unique())
 op_list = ["Tous"] + sorted(data_all["Operateur"].dropna().unique().tolist())
-op_selected = st.sidebar.selectbox("Opérateur", op_list)
-
 cible_list = ["Toutes"] + sorted([x for x in data_all["Cible"].dropna().unique().tolist() if x])
-cible_selected = st.sidebar.selectbox("Cible", cible_list)
-
 semaines = ["Toutes"] + sorted([x for x in data_all["Semaine"].unique().tolist() if x])
-semaine_selected = st.sidebar.selectbox("Semaine", semaines)
-
 nafs = ["Tous"] + sorted([x for x in data_all["Cible / code NAF"].unique().tolist() if x])
-naf_selected = st.sidebar.selectbox("Cible / code NAF", nafs)
 
-st.sidebar.markdown(f"""
-<div class="selection-card">
-    <div class="selection-title">Sélection actuelle</div>
-    <div class="selection-value">Opérateur : {op_selected}</div>
-    <div class="selection-value">Cible : {cible_selected}</div>
-    <div class="selection-value">Semaine : {semaine_selected}</div>
-    <div class="selection-value">NAF : {naf_selected}</div>
-</div>
-""", unsafe_allow_html=True)
+with st.sidebar.form("form_filtres"):
+    mois_temp = st.selectbox("Mois", ["Tous"] + mois_list)
+    op_temp = st.selectbox("Opérateur", op_list)
+    cible_temp = st.selectbox("Cible", cible_list)
+    semaine_temp = st.selectbox("Semaine", semaines)
+    naf_temp = st.selectbox("Cible / code NAF", nafs)
+
+    submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
+
+if submit:
+    st.cache_data.clear()
+    st.session_state.data_all = charger_donnees()
+
+    st.session_state.filters_applied = {
+        "mois": mois_temp,
+        "operateur": op_temp,
+        "cible": cible_temp,
+        "semaine": semaine_temp,
+        "naf": naf_temp
+    }
+
+    st.rerun()
+
+mois_selected = st.session_state.filters_applied["mois"]
+op_selected = st.session_state.filters_applied["operateur"]
+cible_selected = st.session_state.filters_applied["cible"]
+semaine_selected = st.session_state.filters_applied["semaine"]
+naf_selected = st.session_state.filters_applied["naf"]
 
 data = data_all.copy()
 
