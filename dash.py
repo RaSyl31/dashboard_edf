@@ -470,7 +470,7 @@ st.sidebar.image("logo_hellopro.png", width=250)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
-if st.sidebar.button("🔄 REFRESH", use_container_width=True):
+if st.sidebar.button("🔄 Mettre à jour", use_container_width=True):
     st.cache_data.clear()
     st.session_state.data_all = charger_donnees()
     st.rerun()
