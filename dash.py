@@ -527,18 +527,13 @@ if "filters_applied" not in st.session_state:
 st.sidebar.image("logo_hellopro.png", width=250)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
-submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
-st.sidebar.title("Filtres")
-
-dates_valides = data_all["Date appel"].dropna()
-
-mois_list = sorted(data_all["Date appel"].dropna().dt.to_period("M").astype(str).unique())
-op_list = ["Tous"] + sorted(data_all["Operateur"].dropna().unique().tolist())
-cible_list = ["Toutes"] + sorted([x for x in data_all["Cible"].dropna().unique().tolist() if x])
-semaines = ["Toutes"] + sorted([x for x in data_all["Semaine"].unique().tolist() if x])
-nafs = ["Tous"] + sorted([x for x in data_all["Cible / code NAF"].unique().tolist() if x])
-
 with st.sidebar.form("form_filtres"):
+
+    # 👉 Bouton en haut
+    submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
+
+    st.markdown("### Filtres")
+
     mois_temp = st.selectbox("Mois", ["Tous"] + mois_list)
     op_temp = st.selectbox("Opérateur", op_list)
     cible_temp = st.selectbox("Cible", cible_list)
