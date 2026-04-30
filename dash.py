@@ -527,6 +527,8 @@ if "filters_applied" not in st.session_state:
 st.sidebar.image("logo_hellopro.png", width=250)
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
+submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
+
 st.sidebar.title("Filtres")
 
 dates_valides = data_all["Date appel"].dropna()
@@ -543,8 +545,6 @@ with st.sidebar.form("form_filtres"):
     cible_temp = st.selectbox("Cible", cible_list)
     semaine_temp = st.selectbox("Semaine", semaines)
     naf_temp = st.selectbox("Cible / code NAF", nafs)
-
-    submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
 
 if submit:
     st.cache_data.clear()
