@@ -821,18 +821,36 @@ if not df_agents.empty:
         width=0.35
     ))
 
-    fig_obj.update_layout(
-        barmode="overlay",
-        height=430,
-        plot_bgcolor="#FFFFFF",
-        paper_bgcolor="#FFFFFF",
-        font=dict(color="#111111"),
-        legend_title_text="",
-        yaxis_title="Volume",
-        xaxis_title="",
-        bargap=0.35,
-        margin=dict(l=30, r=30, t=30, b=30)
-    )
+fig_obj.update_layout(
+    barmode="overlay",
+    height=430,
+    plot_bgcolor="#FFFFFF",
+    paper_bgcolor="#FFFFFF",
+    font=dict(color="#111827", size=13),
+    legend_title_text="",
+    legend=dict(
+        font=dict(color="#111827", size=13),
+        bgcolor="rgba(255,255,255,0.85)",
+        bordercolor="#E5E7EB",
+        borderwidth=1
+    ),
+    yaxis_title="Volume",
+    xaxis_title="",
+    bargap=0.35,
+    margin=dict(l=50, r=30, t=30, b=60)
+)
+
+fig_obj.update_yaxes(
+    showgrid=True,
+    gridcolor="#E5E7EB",
+    tickfont=dict(color="#111827", size=12),
+    titlefont=dict(color="#111827", size=13)
+)
+
+fig_obj.update_xaxes(
+    showgrid=False,
+    tickfont=dict(color="#111827", size=12)
+)
 
     fig_obj.update_yaxes(showgrid=True, gridcolor="#E5E7EB")
     fig_obj.update_xaxes(showgrid=False)
