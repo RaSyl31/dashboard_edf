@@ -233,6 +233,32 @@ section[data-testid="stSidebar"] textarea {
     color: black !important;
 }
 
+/* Champs filtres sidebar */
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+    border: 1px solid #D1D5DB !important;
+}
+
+/* Texte sélectionné */
+section[data-testid="stSidebar"] div[data-baseweb="select"] span {
+    color: #111827 !important;
+}
+
+/* Flèche dropdown */
+section[data-testid="stSidebar"] div[data-baseweb="select"] svg {
+    fill: #111827 !important;
+}
+
+/* Menu déroulant ouvert */
+div[data-baseweb="popover"] {
+    background-color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] * {
+    color: #111827 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
