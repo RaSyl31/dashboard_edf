@@ -48,8 +48,8 @@ st.markdown("""
 
 .kpi-card {
     background-color: white;
-    padding: 12px 14px;
-    border-radius: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
     border: 1px solid #E5EAF2;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.04);
     text-align: center;
@@ -57,15 +57,15 @@ st.markdown("""
 }
 
 .kpi-label {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 650;
     color: #374151;
     text-align: center;
 }
 
 .kpi-value {
-    font-size: 25px;
-    font-weight: 900;
+    font-size: 22px;
+    font-weight: 800;
     margin-top: 4px;
     text-align: center;
 }
@@ -160,7 +160,7 @@ section[data-testid="stSidebar"] button {
 }
 
 .kpi-icon {
-    font-size: 34px;
+    font-size: 25px;
     color: #64748B;
 }
 
