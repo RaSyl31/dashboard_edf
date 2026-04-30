@@ -171,7 +171,7 @@ section[data-testid="stSidebar"] button {
 }
 
 .kpi-flow-value {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 800;
     color: #182466;
     line-height: 1.1;
