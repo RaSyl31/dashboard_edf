@@ -6,6 +6,21 @@ import plotly.express as px
 import plotly.graph_objects as go
 from io import BytesIO
 
+if "mois_temp" not in st.session_state:
+    st.session_state.mois_temp = "Tous"  # Valeur par défaut
+
+if "op_temp" not in st.session_state:
+    st.session_state.op_temp = "Tous"
+
+if "cible_temp" not in st.session_state:
+    st.session_state.cible_temp = "Toutes"
+
+if "semaine_temp" not in st.session_state:
+    st.session_state.semaine_temp = "Toutes"
+
+if "naf_temp" not in st.session_state:
+    st.session_state.naf_temp = "Tous"
+
 param_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPtJ4Ipch22BEPIjkL4U466elod-K3yegtgOiYKAcaXjMmcqpsM6g8zuA2F5VWWaZdrXavEIP3AbY2/pub?output=csv"
 
 OBJECTIF_JOURNALIER_PAR_AGENT = 3
