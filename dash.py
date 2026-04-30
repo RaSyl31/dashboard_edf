@@ -665,37 +665,33 @@ st.markdown('<div class="section-title">📊 Funnel production</div>', unsafe_al
 fig_funnel = go.Figure(go.Funnel(
     y=["Total fiches", "Contacté", "Joint", "Qualification OK"],
     x=[kpi["total"], kpi["contacte"], kpi["joint"], kpi["ok"]],
-
     textinfo="value+percent initial",
-
     textfont=dict(
         size=18,
         color="white"
     ),
-
     marker=dict(
         color=["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]
     ),
-
     connector=dict(
         fillcolor="#E5E7EB"
     ),
-
     opacity=0.95
-))
-
-fig_funnel.update_layout(
-    font=dict(size=16, color="#111827")
-)
-    connector=dict(fillcolor="#ddebea"),
-    marker={"color": ["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]}
 ))
 
 fig_funnel.update_layout(
     height=420,
     paper_bgcolor="#FFFFFF",
     plot_bgcolor="#FFFFFF",
+    font=dict(size=16, color="#111827"),
     margin=dict(l=20, r=20, t=30, b=20)
+)
+
+fig_funnel.update_yaxes(
+    tickfont=dict(
+        size=16,
+        color="#111827"
+    )
 )
 
 st.plotly_chart(fig_funnel, use_container_width=True)
