@@ -382,7 +382,12 @@ def gauge(title, value, max_value):
             }
         },
         gauge={
-            "axis": {"range": [0, max_value], "visible": False},
+            "axis": {
+                "range": [0, max_value],
+                "tickvals": [max_value],
+                "ticktext": ["0%", f"{max_value}%"],
+                "tickfont": {"size": 12, "color": "#6B7280"}
+            }
             "bar": {
                 "color": "#3c5bff",
                 "thickness": 0.28
