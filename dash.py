@@ -381,20 +381,24 @@ def gauge(title, value, max_value):
                 "color": "#182466"
             }
         },
-gauge={
-    "axis": {
-        "range": [0, max_value],
-        "tickvals": [0, max_value],
-        "ticktext": ["0%", f"{max_value}%"],
-        "tickfont": {"size": 12, "color": "#6B7280"}
-    },
-    "bar": {
-        "color": "#3c5bff",
-        "thickness": 0.28
-    },
-    "bgcolor": "#E5E7EB",
-    "borderwidth": 0
-}
+        gauge={
+            "axis": {
+                "range": [0, max_value],
+                "tickvals": [0, max_value],
+                "ticktext": ["0%", f"{max_value}%"],
+                "tickfont": {
+                    "size": 12,
+                    "color": "#6B7280"
+                }
+            },
+            "bar": {
+                "color": "#3c5bff",
+                "thickness": 0.28
+            },
+            "bgcolor": "#E5E7EB",
+            "borderwidth": 0
+        }
+    ))
 
     fig.update_layout(
         height=140,
@@ -403,17 +407,6 @@ gauge={
     )
 
     st.plotly_chart(fig, use_container_width=True)
-    st.markdown(f"""
-        <div style="
-        text-align:center;
-        font-size:13px;
-        font-weight:800;
-        color:#6B7280;
-        margin-top:-18px;
-        ">
-        Limite : {max_value}%
-        </div>
-        """, unsafe_allow_html=True)
 
 data_all = charger_donnees()
 
