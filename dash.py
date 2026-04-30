@@ -689,7 +689,7 @@ fig_funnel = go.Figure(go.Funnel(
     x=[kpi["total"], kpi["contacte"], kpi["joint"], kpi["ok"]],
     textinfo="value+percent initial",
     textfont=dict(
-        size=18,
+        size=15,
         color="white"
     ),
     marker=dict(
