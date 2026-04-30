@@ -382,7 +382,7 @@ def gauge(title, value, max_value):
         number={
             "suffix": "%",
             "font": {
-                "size": 28,
+                "size": 22,
                 "color": "#182466"
             }
         },
@@ -392,7 +392,7 @@ def gauge(title, value, max_value):
                 "tickvals": [0, max_value],
                 "ticktext": ["0%", f"{max_value}%"],
                 "tickfont": {
-                    "size": 12,
+                    "size": 10,
                     "color": "#182466"
                 }
             },
