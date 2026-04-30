@@ -665,7 +665,7 @@ if not df_agents.empty:
     font-weight: 700;
     color: #10571b;
 ">
-🏆 Top opérateur : {top['Opérateur']} | 
+🏆 {top['Opérateur']} | 
 Réalisé : {top['Réalisé']} / Objectif : {top['Objectif']} 
 ({top['Atteinte objectif %']}%)
 </div>
