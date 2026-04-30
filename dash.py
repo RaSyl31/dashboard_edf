@@ -209,6 +209,11 @@ section[data-testid="stSidebar"] button {
     min-width: 100%;
 }
 
+.agent-table td:first-child {
+    background-color: #121b4c !important;  /* 👉 couleur ici */
+    font-weight: 700;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
