@@ -294,9 +294,9 @@ def charger_donnees():
     param_df = pd.read_csv(param_url, dtype=str, keep_default_na=False, on_bad_lines="skip")
     all_data = []
 
-    for _, row in param_df.iterrows():
-        if row["Actif"].strip().lower() != "oui":
-            continue
+for _, row in param_df.iterrows():
+    if row["Actif"].strip().lower() != "oui":
+        continue
 
     lien = row["Lien Google Sheet"].strip()
     sep = "&" if "?" in lien else "?"
@@ -309,8 +309,8 @@ def charger_donnees():
         on_bad_lines="skip"
     )
 
-        df["Operateur"] = row["Opérateur"].strip()
-        all_data.append(df)
+    df["Operateur"] = row["Opérateur"].strip()
+    all_data.append(df)
 
     data = pd.concat(all_data, ignore_index=True)
     data.columns = data.columns.str.strip()
