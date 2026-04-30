@@ -852,8 +852,8 @@ fig_obj.update_xaxes(
     tickfont=dict(color="#111827", size=12)
 )
 
-    fig_obj.update_yaxes(showgrid=True, gridcolor="#E5E7EB")
-    fig_obj.update_xaxes(showgrid=False)
+fig_obj.update_yaxes(showgrid=True, gridcolor="#E5E7EB")
+fig_obj.update_xaxes(showgrid=False)
 
     st.plotly_chart(fig_obj, use_container_width=True)
 
