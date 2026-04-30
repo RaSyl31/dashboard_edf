@@ -665,11 +665,23 @@ st.markdown('<div class="section-title">📊 Funnel production</div>', unsafe_al
 fig_funnel = go.Figure(go.Funnel(
     y=["Total fiches", "Contacté", "Joint", "Qualification OK"],
     x=[kpi["total"], kpi["contacte"], kpi["joint"], kpi["ok"]],
+
     textinfo="value+percent initial",
-     textfont=dict(
-        size=18,   # 👈 augmente ici
+
+    # 👉 TEXTE DANS LES BLOCS
+    textfont=dict(
+        size=18,
         color="white"
     ),
+
+    # 👉 LABELS À GAUCHE (LE PROBLÈME)
+    hoverlabel=dict(font_size=14),
+
+    # 👉 FORCER STYLE GLOBAL
+    marker={"color": ["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]},
+
+    opacity=0.95
+))
     connector=dict(fillcolor="#ddebea"),
     marker={"color": ["#0F172A", "#2563EB", "#38BDF8", "#16A34A"]}
 ))
