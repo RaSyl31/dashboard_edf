@@ -1,4 +1,5 @@
 from textwrap import dedent
+import time
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -297,12 +298,16 @@ def charger_donnees():
         if row["Actif"].strip().lower() != "oui":
             continue
 
-        df = pd.read_csv(
-            row["Lien Google Sheet"].strip(),
-            dtype=str,
-            keep_default_na=False,
-            on_bad_lines="skip"
-        )
+    lien = row["Lien Google Sheet"].strip()
+    sep = "&" if "?" in lien else "?"
+    lien = f"{lien}{sep}cache_buster={int(time.time())}"
+
+    df = pd.read_csv(
+        lien,
+        dtype=str,
+        keep_default_na=False,
+        on_bad_lines="skip"
+    )
 
         df["Operateur"] = row["Opérateur"].strip()
         all_data.append(df)
