@@ -852,7 +852,7 @@ fig_obj.update_xaxes(
     tickfont=dict(color="#111827", size=12)
 )
 
-    st.plotly_chart(fig_obj, use_container_width=True)
+st.plotly_chart(fig_obj, use_container_width=True)
 
 st.markdown('<div class="section-title">Performance par agent</div>', unsafe_allow_html=True)
 
