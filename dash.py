@@ -381,20 +381,20 @@ def gauge(title, value, max_value):
                 "color": "#182466"
             }
         },
-        gauge={
-            "axis": { "range": [0, max_value],
-                "tickvals": [max_value],
-                "ticktext": ["0%", f"{max_value}%"],
-                "tickfont": {"size": 12, "color": "#6B7280"}
-            }
-            "bar": {
-                "color": "#3c5bff",
-                "thickness": 0.28
-            },
-            "bgcolor": "#E5E7EB",
-            "borderwidth": 0
-        }
-    ))
+gauge={
+    "axis": {
+        "range": [0, max_value],
+        "tickvals": [0, max_value],
+        "ticktext": ["0%", f"{max_value}%"],
+        "tickfont": {"size": 12, "color": "#6B7280"}
+    },
+    "bar": {
+        "color": "#3c5bff",
+        "thickness": 0.28
+    },
+    "bgcolor": "#E5E7EB",
+    "borderwidth": 0
+}
 
     fig.update_layout(
         height=140,
