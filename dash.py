@@ -216,6 +216,23 @@ section[data-testid="stSidebar"] button {
     font-weight: 700;
 }
 
+section[data-testid="stSidebar"] input,
+section[data-testid="stSidebar"] select,
+section[data-testid="stSidebar"] textarea {
+    background-color: white !important;
+    color: black !important;
+    border-radius: 8px;
+}
+
+[data-baseweb="select"] {
+    background-color: white !important;
+    border-radius: 8px;
+}
+
+[data-baseweb="select"] * {
+    color: black !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -444,8 +461,9 @@ periode = None
 if not dates_valides.empty:
     date_min = dates_valides.min().date()
     date_max = dates_valides.max().date()
-    periode = st.sidebar.date_input("Période", value=(date_min, date_max))
-    
+    mois_list = sorted(data_all["Date appel"].dropna().dt.to_period("M").astype(str).unique())
+    mois_selected = st.sidebar.selectbox("Mois", ["Tous"] + mois_list)
+
 op_list = ["Tous"] + sorted(data_all["Operateur"].dropna().unique().tolist())
 op_selected = st.sidebar.selectbox("Opérateur", op_list)
 
@@ -482,10 +500,8 @@ if semaine_selected != "Toutes":
 if naf_selected != "Tous":
     data = data[data["Cible / code NAF"] == naf_selected]
 
-if periode and len(periode) == 2:
-    debut = pd.to_datetime(periode[0])
-    fin = pd.to_datetime(periode[1])
-    data = data[(data["Date appel"] >= debut) & (data["Date appel"] <= fin)]
+if mois_selected != "Tous":
+    data = data[data["Date appel"].dt.to_period("M").astype(str) == mois_selected]
 
 kpi = calcul_kpi(data)
 df_agents = build_agent_table(data)
