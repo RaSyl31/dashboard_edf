@@ -89,10 +89,6 @@ st.markdown("""
     color: white !important;
 }
 
-[data-baseweb="select"] * {
-    color: #111111 !important;
-}
-
 .selection-card {
     background-color: #1F2937;
     padding: 14px;
