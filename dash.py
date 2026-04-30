@@ -388,7 +388,7 @@ def gauge(title, value, max_value):
                 "ticktext": ["0%", f"{max_value}%"],
                 "tickfont": {
                     "size": 12,
-                    "color": "#6B7280"
+                    "color": "#182466"
                 }
             },
             "bar": {
@@ -402,7 +402,7 @@ def gauge(title, value, max_value):
 
     fig.update_layout(
         height=120,
-        margin=dict(l=10, r=10, t=10, b=20),
+        margin=dict(l=10, r=10, t=15, b=15),
         paper_bgcolor="white"
     )
 
