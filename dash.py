@@ -350,9 +350,8 @@ def flow_card(icon, label, value):
     """, unsafe_allow_html=True)
 
 
-def gauge(title, value):
+def gauge(title, value, max_value):
 
-    # 👉 TITRE AU-DESSUS
     st.markdown(f"""
     <div style="text-align:center; margin-bottom:6px;">
         <div style="
@@ -372,7 +371,6 @@ def gauge(title, value):
     </div>
     """, unsafe_allow_html=True)
 
-    # 👉 GAUGE
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
@@ -384,7 +382,7 @@ def gauge(title, value):
             }
         },
         gauge={
-            "axis": {"range": [0, 100], "visible": False},
+            "axis": {"range": [0, max_value], "visible": False},
             "bar": {
                 "color": "#3c5bff",
                 "thickness": 0.28
@@ -495,15 +493,13 @@ g1, g2, g3, g4 = st.columns(4)
 
 with g1:
     gauge("Taux de traitement", round(kpi["taux_traitement"] * 100, 2))
-
 with g2:
-    gauge("Taux joint", round(kpi["taux_joint"] * 100, 2))
+    gauge("Taux joint", round(kpi["taux_joint"] * 100, 2), 50)
 with g3:
-    gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2))
-
+    gauge("Taux OK/joint", round(kpi["taux_tj"] * 100, 2), 10)
 with g4:
-    gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2))
-
+    gauge("Taux OK/contacté", round(kpi["taux_tc"] * 100, 2), 5)
+    
 st.markdown('<div class="section-title">►  Résultat par agent</div>', unsafe_allow_html=True)
 
 def pct_to_float(value):
