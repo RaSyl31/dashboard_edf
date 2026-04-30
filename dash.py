@@ -290,27 +290,28 @@ section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
 
 
 @st.cache_data(ttl=10)
+# La fonction doit être indentée correctement
 def charger_donnees():
     param_df = pd.read_csv(param_url, dtype=str, keep_default_na=False, on_bad_lines="skip")
     all_data = []
 
-for _, row in param_df.iterrows():
-    if row["Actif"].strip().lower() != "oui":
-        continue
+    for _, row in param_df.iterrows():
+        if row["Actif"].strip().lower() != "oui":
+            continue
 
-    lien = row["Lien Google Sheet"].strip()
-    sep = "&" if "?" in lien else "?"
-    lien = f"{lien}{sep}cache_buster={int(time.time())}"
+        lien = row["Lien Google Sheet"].strip()
+        sep = "&" if "?" in lien else "?"
+        lien = f"{lien}{sep}cache_buster={int(time.time())}"
 
-    df = pd.read_csv(
-        lien,
-        dtype=str,
-        keep_default_na=False,
-        on_bad_lines="skip"
-    )
+        df = pd.read_csv(
+            lien,
+            dtype=str,
+            keep_default_na=False,
+            on_bad_lines="skip"
+        )
 
-    df["Operateur"] = row["Opérateur"].strip()
-    all_data.append(df)
+        df["Operateur"] = row["Opérateur"].strip()
+        all_data.append(df)
 
     data = pd.concat(all_data, ignore_index=True)
     data.columns = data.columns.str.strip()
@@ -321,18 +322,20 @@ for _, row in param_df.iterrows():
     data["Cible / code NAF"] = data["Cible / code NAF"].fillna("").astype(str).str.strip()
 
     data["Cible"] = (
-    data["Cible"]
-    .fillna("")
-    .astype(str)
-    .str.strip()
-    .str.replace("\u00a0", " ", regex=False)
-)
+        data["Cible"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.replace("\u00a0", " ", regex=False)
+    )
 
     data["Date appel"] = pd.to_datetime(
         data["Date de l'appel"],
         errors="coerce",
         dayfirst=True
     )
+
+    # Assure-toi que le return est bien à la fin de la fonction
     return data
 def calcul_kpi(df):
     total = len(df)
