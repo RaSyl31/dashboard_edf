@@ -844,7 +844,7 @@ fig_obj.update_yaxes(
     showgrid=True,
     gridcolor="#E5E7EB",
     tickfont=dict(color="#111827", size=12),
-    titlefont=dict(color="#111827", size=13)
+    title_font=dict(color="#111827", size=13)
 )
 
 fig_obj.update_xaxes(
