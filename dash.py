@@ -210,7 +210,7 @@ section[data-testid="stSidebar"] button {
 }
 
 .agent-table td:first-child {
-    background-color: #121b4c !important;  /* 👉 couleur ici */
+    background-color: #c5ceff !important;  /* 👉 couleur ici */
     font-weight: 700;
 }
 
@@ -571,7 +571,7 @@ if not df_agents.empty:
 }}
 
 .agent-table th {{
-    background: #0F172A;
+    background: #121b4c;
     color: white;
     padding: 12px 10px;
     text-align: center;
