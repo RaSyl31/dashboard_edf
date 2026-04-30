@@ -428,7 +428,7 @@ st.sidebar.image("logo_hellopro.png", width=250)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
-if st.sidebar.button("🔄 Rafraîchir les données", use_container_width=True):
+if st.sidebar.button("🔄 Mettre à jour", use_container_width=True):
     st.sidebar.success("Actualisation en cours...")
     st.cache_data.clear()
     st.cache_resource.clear()
