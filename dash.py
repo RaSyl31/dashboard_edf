@@ -600,26 +600,27 @@ logo_edf = get_base64_image("logo_edf.png")
 components.html(f"""
 <div style="
     background: linear-gradient(90deg, #ffffff 0%, #eef3ff 100%);
-    padding: 22px;
+    padding: 18px;
     border-radius: 18px;
     border: 1px solid #E3E8F0;
     box-shadow: 0px 4px 14px rgba(0,0,0,0.05);
     text-align:center;
 ">
     <span style="
-        font-size:42px;
+        font-size:34px;
         font-weight:900;
         color:#3c5bff;
         vertical-align:middle;
+        font-family:Arial, sans-serif;
     ">
         Dashboard Production - EDF Solutions Solaires
     </span>
 
     <img src="data:image/png;base64,{logo_edf}"
-         width="55"
-         style="vertical-align:middle; margin-left:12px;">
+         width="95"
+         style="vertical-align:middle; margin-left:16px;">
 </div>
-""", height=110)
+""", height=95)
 
 st.markdown('<div class="section-title">►  Résultat global</div>', unsafe_allow_html=True)
 
