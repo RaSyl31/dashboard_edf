@@ -7,6 +7,8 @@ import plotly.graph_objects as go
 from io import BytesIO
 import base64
 
+import streamlit.components.v1 as components
+
 if "mois_temp" not in st.session_state:
     st.session_state.mois_temp = "Tous"  # Valeur par défaut
 
@@ -595,19 +597,17 @@ df_agents = build_agent_table(data)
 
 logo_edf = get_base64_image("logo_edf.png")
 
-st.markdown(f"""
+components.html(f"""
 <div style="
     background: linear-gradient(90deg, #ffffff 0%, #eef3ff 100%);
     padding: 22px;
     border-radius: 18px;
     border: 1px solid #E3E8F0;
     box-shadow: 0px 4px 14px rgba(0,0,0,0.05);
-    margin-bottom: 15px;
     text-align:center;
 ">
-
     <span style="
-        font-size:48px;
+        font-size:42px;
         font-weight:900;
         color:#3c5bff;
         vertical-align:middle;
@@ -617,15 +617,9 @@ st.markdown(f"""
 
     <img src="data:image/png;base64,{logo_edf}"
          width="55"
-         style="
-            vertical-align:middle;
-            margin-left:12px;
-         ">
-
+         style="vertical-align:middle; margin-left:12px;">
 </div>
-""", unsafe_allow_html=True)
-
-st.markdown('<div class="section-title">►  Résultat global</div>', unsafe_allow_html=True)
+""", height=110)
 
 c1, c2, c3, c4 = st.columns(4)
 
