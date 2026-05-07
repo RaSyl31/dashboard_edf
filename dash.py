@@ -607,7 +607,7 @@ components.html(f"""
     text-align:center;
 ">
     <span style="
-        font-size:25px;
+        font-size:27px;
         font-weight:900;
         color:#3c5bff;
         vertical-align:middle;
