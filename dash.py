@@ -545,7 +545,7 @@ nafs = ["Tous"] + sorted([x for x in data_all["Cible / code NAF"].unique().tolis
 with st.sidebar.form("form_filtres"):
 
     # 👉 Bouton en haut
-    submit = st.form_submit_button("🔄 Mettre à jour", use_container_width=True)
+    submit = st.form_submit_button("🔄 Actualisé", use_container_width=True)
 
     st.markdown("### Filtres")
 
