@@ -353,6 +353,8 @@ def charger_donnees():
     # Assure-toi que le return est bien à la fin de la fonction
     return data
 def calcul_kpi(df):
+    df = df[df["N° tél utilisé"].fillna("").astype(str).str.strip() != ""]
+
     total = len(df)
     invalide = len(df[df["Statut"] == "Invalide"])
     non_joint = len(df[df["Statut"] == "Non joint"])
