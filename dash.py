@@ -513,6 +513,10 @@ def gauge(title, value, max_value):
     </div>
     """, unsafe_allow_html=True)
 
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
 if "data_all" not in st.session_state:
     st.session_state.data_all = charger_donnees()
 
