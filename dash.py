@@ -591,7 +591,7 @@ df_agents = build_agent_table(data)
 st.markdown("""
 <h1 style="text-align:center;">
 Dashboard Production - EDF Solutions Solaires 
-<img src="logo_edf.png" width="40" style="vertical-align: middle;">
+<img src="logo_edf.PNG" width="40" style="vertical-align: middle;">
 </h1>
 """, unsafe_allow_html=True)
 
