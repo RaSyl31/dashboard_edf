@@ -617,7 +617,7 @@ components.html(f"""
     </span>
 
     <img src="data:image/png;base64,{logo_edf}"
-         width="95"
+         width="125"
          style="vertical-align:middle; margin-left:16px;">
 </div>
 """, height=95)
