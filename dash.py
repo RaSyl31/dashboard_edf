@@ -589,9 +589,10 @@ kpi = calcul_kpi(data)
 df_agents = build_agent_table(data)
 
 st.markdown("""
-<div class="header-card">
-    <div class="title"> Dashboard Production - EDF Solutions Solaires ⚡</div>
-</div>
+<h1 style="text-align:center;">
+Dashboard Production - EDF Solutions Solaires 
+<img src="logo_edf.png" width="40" style="vertical-align: middle;">
+</h1>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">►  Résultat global</div>', unsafe_allow_html=True)
