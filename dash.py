@@ -9,99 +9,106 @@ import pytesseract
 import streamlit as st
 from PIL import Image
 
-# --- Si Tesseract n'est pas dans le PATH (Windows local uniquement) :
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 st.set_page_config(page_title="Renommage AG", page_icon="🖼️", layout="centered")
 
-# Regex : AG + chiffres + tiret + suite (lettres/chiffres/espaces/tirets)
-PATTERN_AG = re.compile(r"AG\s*\d+\s*-\s*[\w\s\-]+", re.IGNORECASE)
+# Version du schéma de résultats — à incrémenter si on change la structure
+RESULTS_VERSION = 3
+
+PATTERN_AG = re.compile(r"AG\s*[O0-9]{1,3}\s*-\s*[\w\s\-]{5,}", re.IGNORECASE)
 
 
 # --------------------------------------------------------------------
 # PRÉTRAITEMENTS
 # --------------------------------------------------------------------
 
-def preprocess_variants(img_pil: Image.Image) -> list[Image.Image]:
-    """Retourne plusieurs versions prétraitées de l'image pour maximiser les chances OCR."""
-    variants = []
+def variants_for_ocr(img_pil: Image.Image) -> list[Image.Image]:
+    """Génère plusieurs versions prétraitées pour maximiser les chances."""
+    out = []
 
-    # 1. Original agrandi x3 (Tesseract aime les grands caractères)
-    big = img_pil.resize((img_pil.width * 3, img_pil.height * 3), Image.LANCZOS)
-    variants.append(big.convert("L"))
+    # 1. Agrandissement x2 puis x3 (netteté)
+    for scale in (2, 3):
+        big = img_pil.resize((img_pil.width * scale, img_pil.height * scale), Image.LANCZOS)
+        out.append(big.convert("L"))
 
-    # 2. Niveaux de gris + seuillage Otsu (noir/blanc pur)
-    gray = np.array(img_pil.convert("L"))
-    _, otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    variants.append(Image.fromarray(otsu))
+    # 2. Otsu (noir sur blanc) sur l'image agrandie x2
+    big2 = img_pil.resize((img_pil.width * 2, img_pil.height * 2), Image.LANCZOS).convert("L")
+    arr = np.array(big2)
+    _, otsu = cv2.threshold(arr, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    out.append(Image.fromarray(otsu))
+    # 3. Version inversée (essentiel pour texte blanc sur fond rouge)
+    out.append(Image.fromarray(cv2.bitwise_not(otsu)))
 
-    # 3. Version inversée (utile pour texte blanc sur fond sombre/rouge)
-    variants.append(Image.fromarray(cv2.bitwise_not(otsu)))
+    # 4. Seuillage spécifique pour faire ressortir le blanc (texte blanc sur rouge)
+    #    On garde les pixels très clairs
+    _, white_keep = cv2.threshold(arr, 180, 255, cv2.THRESH_BINARY)
+    out.append(Image.fromarray(cv2.bitwise_not(white_keep)))
 
-    # 4. Version agrandie x3 + inversée
-    big_arr = np.array(big.convert("L"))
-    _, otsu_big = cv2.threshold(big_arr, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    variants.append(Image.fromarray(cv2.bitwise_not(otsu_big)))
-
-    return variants
+    return out
 
 
-def crop_regions(img_pil: Image.Image) -> list[Image.Image]:
-    """Retourne plusieurs zones de l'image (bandeau haut, moitié haute, image entière)."""
+def tiles(img_pil: Image.Image) -> list[Image.Image]:
+    """
+    Découpe l'image en zones qui pourraient contenir le code :
+    - bandeau haut global
+    - chaque moitié verticale du haut
+    - tiers supérieur
+    - image entière
+    """
     w, h = img_pil.size
-    return [
-        img_pil.crop((0, 0, w, int(h * 0.10))),   # bandeau très haut
-        img_pil.crop((0, 0, w, int(h * 0.18))),   # bandeau haut
-        img_pil.crop((0, 0, w, int(h * 0.30))),   # tiers supérieur
-        img_pil.crop((0, 0, w, int(h * 0.50))),   # moitié haute
-        img_pil,                                   # image complète
+    zones = [
+        img_pil.crop((0, 0, w, int(h * 0.15))),
+        img_pil.crop((0, 0, w, int(h * 0.25))),
+        img_pil.crop((0, 0, w, int(h * 0.40))),
+        img_pil.crop((0, 0, w // 2, int(h * 0.25))),          # moitié gauche du haut
+        img_pil.crop((w // 2, 0, w, int(h * 0.25))),          # moitié droite du haut
+        img_pil.crop((0, 0, w, int(h * 0.60))),
+        img_pil,
     ]
+    return zones
 
 
 # --------------------------------------------------------------------
 # EXTRACTION
 # --------------------------------------------------------------------
 
-def try_ocr_on(image_pil: Image.Image, lang: str = "fra+eng") -> str:
-    """OCR avec plusieurs modes PSM, retourne le texte concaténé."""
+def ocr_multi_psm(img_pil: Image.Image, lang: str = "fra+eng") -> str:
+    """OCR avec plusieurs modes PSM, retourne tout concaténé."""
     text = ""
-    for psm in (6, 7, 11):  # 6=bloc, 7=ligne unique, 11=texte épars
+    for psm in (6, 7, 11, 12):
         try:
-            cfg = f"--psm {psm}"
-            text += "\n" + pytesseract.image_to_string(image_pil, lang=lang, config=cfg)
+            text += "\n" + pytesseract.image_to_string(
+                img_pil, lang=lang, config=f"--psm {psm}"
+            )
         except Exception:
             pass
     return text
 
 
-def extract_code_ag(img_pil: Image.Image, debug: bool = False) -> tuple[str | None, str]:
+def extract_code_ag(img_pil: Image.Image) -> tuple[str | None, str]:
     """
-    Cherche le code AG en combinant :
-    - plusieurs zones (bandeau, moitié haute, image entière)
-    - plusieurs prétraitements (gris, Otsu, inversé, agrandi)
-    - plusieurs modes Tesseract
+    Parcourt toutes les zones × tous les prétraitements × tous les PSM.
     Retourne (code, texte_ocr_brut).
     """
     all_text = ""
 
-    for region in crop_regions(img_pil):
-        for variant in preprocess_variants(region):
-            text = try_ocr_on(variant)
+    for zone in tiles(img_pil):
+        for variant in variants_for_ocr(zone):
+            text = ocr_multi_psm(variant)
             all_text += "\n" + text
 
-            match = PATTERN_AG.search(text)
-            if match:
-                code = clean_code(match.group(0))
-                return code, all_text
+            m = PATTERN_AG.search(text)
+            if m:
+                return clean_code(m.group(0)), all_text
 
     return None, all_text
 
 
 def clean_code(code: str) -> str:
-    """Normalise le code extrait."""
     code = code.strip()
-    code = re.sub(r"\s*-\s*", "-", code)   # "A - B" -> "A-B"
-    code = re.sub(r"\s+", " ", code)       # espaces multiples -> un seul
+    code = re.sub(r"\s*-\s*", "-", code)
+    code = re.sub(r"\s+", " ", code)
     code = code.strip("- ").strip()
     return code
 
@@ -127,7 +134,7 @@ def make_zip(results: list[dict]) -> bytes:
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
         for r in results:
-            if r["new_name"]:
+            if r.get("new_name"):
                 ext = Path(r["new_name"]).suffix.lstrip(".").upper() or "PNG"
                 if ext == "JPG":
                     ext = "JPEG"
@@ -148,6 +155,14 @@ st.write("Téléversez vos photos. L'outil détecte le code **AG…** et renomme
 with st.sidebar:
     st.header("Options")
     show_debug = st.checkbox("Afficher le texte OCR brut (debug)", value=True)
+    if st.button("🗑️ Vider le cache"):
+        st.session_state.clear()
+        st.rerun()
+
+# --- Important : si on change la version du schéma, on invalide le cache
+if st.session_state.get("results_version") != RESULTS_VERSION:
+    st.session_state.pop("results", None)
+    st.session_state["results_version"] = RESULTS_VERSION
 
 files = st.file_uploader(
     "Sélectionnez vos images",
@@ -183,10 +198,10 @@ if files and st.button("🚀 Analyser et renommer", type="primary", use_containe
     progress.empty()
     st.session_state["results"] = results
 
-# --- Affichage
+# --- Affichage (avec .get() partout pour éviter le KeyError)
 if st.session_state.get("results"):
     results = st.session_state["results"]
-    ok = [r for r in results if r["new_name"]]
+    ok = [r for r in results if r.get("new_name")]
 
     st.success(f"✅ {len(ok)} / {len(results)} image(s) renommée(s).")
 
@@ -208,7 +223,7 @@ if st.session_state.get("results"):
             st.image(r["image"], use_container_width=True)
         with col2:
             st.markdown(f"**Original :** `{r['original']}`")
-            if r["new_name"]:
+            if r.get("new_name"):
                 st.markdown(f"**Nouveau :** `{r['new_name']}`")
                 st.caption(f"Code détecté : `{r['code']}`")
             else:
@@ -216,7 +231,8 @@ if st.session_state.get("results"):
 
             if show_debug:
                 with st.expander("Voir le texte OCR brut"):
-                    st.text(r["raw_text"][:5000] if r["raw_text"] else "(vide)")
+                    txt = r.get("raw_text") or "(vide)"
+                    st.text(txt[:5000])
 
     if st.button("🔄 Réinitialiser"):
         st.session_state.pop("results", None)
