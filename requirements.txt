@@ -1,5 +1,7 @@
 streamlit
+pytesseract
+Pillow
+opencv-python-headless
+pyzbar
+numpy
 pandas
-plotly
-openpyxl
-matplotlib
